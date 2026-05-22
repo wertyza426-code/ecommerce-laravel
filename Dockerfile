@@ -4,6 +4,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
+    nodejs \
+    npm \
     libsqlite3-dev
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -13,6 +15,8 @@ WORKDIR /app
 COPY . .
 
 RUN composer install
+RUN npm install
+RUN npm run build
 
 EXPOSE 10000
 
